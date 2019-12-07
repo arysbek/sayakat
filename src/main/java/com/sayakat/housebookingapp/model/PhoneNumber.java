@@ -19,7 +19,7 @@ public class PhoneNumber extends AuditModel {
     private Long id;
 
     @Column(length = 10, nullable = false)
-    private String phoneNumber;
+    private String number;
 
     @Column(length = 50, nullable = false)
     private String phone_desc;

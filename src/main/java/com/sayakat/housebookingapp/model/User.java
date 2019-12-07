@@ -35,5 +35,7 @@ public class User extends AuditModel {
     @Column(name = "profile_pic", columnDefinition="BLOB", nullable = true)
     private byte[] profilePic;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private PhoneNumber phoneNumber;
 
 }
