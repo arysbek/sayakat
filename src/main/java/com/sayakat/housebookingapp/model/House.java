@@ -41,11 +41,13 @@ public class House extends AuditModel {
     @Column(length = 1)
     private Byte numberOfGuests;
 
-
     @OneToOne(mappedBy = "host_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User host;
 
     @OneToMany(mappedBy = "photo_id")
     private List<Photo> photo;
+
+    @OneToOne(mappedBy = "house_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Amenity> amenities;
 
 }
