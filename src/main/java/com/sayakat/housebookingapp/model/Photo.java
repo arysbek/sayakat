@@ -22,4 +22,17 @@ public class Photo extends AuditModel {
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
 
+
+    public Long getPhoto_id() {
+        return photo_id;
+    }
+    public void setPhoto_id(Long photo_id) {
+        this.photo_id = photo_id;
+    }
+    public byte[] getPhoto() {
+        return photo;
+    }
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 }
