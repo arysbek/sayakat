@@ -42,6 +42,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createUser);
     }
 
+
     //    @PutMapping("/{id}")
 //    public User update(@PathVariable Long id,@Valid @RequestBody User userRequest) {
 //        return userRepository.findById(id).map(user -> {

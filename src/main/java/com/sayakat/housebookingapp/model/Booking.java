@@ -30,5 +30,4 @@ public class Booking extends AuditModel{
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private House house;
 
-
 }
