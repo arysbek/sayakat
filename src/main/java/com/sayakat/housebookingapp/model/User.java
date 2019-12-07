@@ -31,11 +31,12 @@ public class User extends AuditModel {
     @Column(length = 30, nullable = false)
     private Date dateOfBirth;
 
+    @Column(length = 10, nullable = false, unique = true)
+    private String phoneNumber;
+
     @Lob
     @Column(name = "profile_pic", columnDefinition="BLOB", nullable = true)
     private byte[] profilePic;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private PhoneNumber phoneNumber;
 
 }
