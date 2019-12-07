@@ -1,5 +1,6 @@
 package com.sayakat.housebookingapp.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "houses")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class House extends AuditModel {
 
     @Id
@@ -52,71 +51,7 @@ public class House extends AuditModel {
     @OneToMany(mappedBy = "photo_id")
     private List<Photo> photo;
 
+    @OneToOne
+    private Amenity amenity;
 
-    public Long getHouse_id() {
-        return id;
-    }
-    public void setHouse_id(Long house_id) {
-        this.id = house_id;
-    }
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public Byte getNumberOfRooms() {
-        return numberOfRooms;
-    }
-    public void setNumberOfRooms(Byte numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
-    }
-    public Byte getNumberOfBath() {
-        return numberOfBath;
-    }
-    public void setNumberOfBath(Byte numberOfBath) {
-        this.numberOfBath = numberOfBath;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    public String getRules() {
-        return rules;
-    }
-    public void setRules(String rules) {
-        this.rules = rules;
-    }
-    public Byte getNumberOfGuests() {
-        return numberOfGuests;
-    }
-    public void setNumberOfGuests(Byte numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-    public User getHost() {
-        return host;
-    }
-    public void setHost(User host) {
-        this.host = host;
-    }
-    public List<Photo> getPhoto() {
-        return photo;
-    }
-    public void setPhoto(List<Photo> photo) {
-        this.photo = photo;
-    }
 }

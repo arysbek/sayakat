@@ -1,6 +1,7 @@
 package com.sayakat.housebookingapp.model;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "photo")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Photo extends AuditModel {
 
     @Id
@@ -22,17 +21,4 @@ public class Photo extends AuditModel {
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
 
-
-    public Long getPhoto_id() {
-        return photo_id;
-    }
-    public void setPhoto_id(Long photo_id) {
-        this.photo_id = photo_id;
-    }
-    public byte[] getPhoto() {
-        return photo;
-    }
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
 }
