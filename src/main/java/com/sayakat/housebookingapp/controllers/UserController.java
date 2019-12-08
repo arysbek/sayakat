@@ -1,6 +1,9 @@
 package com.sayakat.housebookingapp.controllers;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sayakat.housebookingapp.exception.ResourceNotFoundException;
 import com.sayakat.housebookingapp.model.User;
 import com.sayakat.housebookingapp.repository.UserRepository;
@@ -19,6 +22,9 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
     private UserRepository userRepository;
 
 
@@ -32,25 +38,32 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public Page<User> fetchAllPosts(Pageable pageable) {
+    public Page<User> fetchAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> create(@Valid @RequestBody User user) {
+    public ResponseEntity<User> create(@RequestBody User user) {
         User createUser = userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createUser);
     }
 
 
-    //    @PutMapping("/{id}")
-//    public User update(@PathVariable Long id,@Valid @RequestBody User userRequest) {
-//        return userRepository.findById(id).map(user -> {
-//            user.setTitle(user.getTitle());
-//            user.setDescription(user.getDescription());
-//            user.setContent(user.getContent());
-//            return userRepository.save(user);
-//        }).orElseThrow(() -> new ResourceNotFoundException("User: " + id + " NotFound"));
-//    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) throws JsonMappingException {
+
+        User savedUser = userRepository.findById(id).get();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        savedUser = objectMapper.updateValue(savedUser, user);
+        userRepository.save(savedUser);
+        return ResponseEntity.ok(savedUser);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
