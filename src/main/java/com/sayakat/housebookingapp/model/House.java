@@ -48,7 +48,7 @@ public class House extends AuditModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User host;
 
-    @OneToMany(mappedBy = "photo_id")
+    @OneToMany(mappedBy = "id")
     private List<Photo> photo;
 
     @OneToOne

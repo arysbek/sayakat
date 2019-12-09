@@ -14,7 +14,7 @@ public class Booking extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    private Long booking_id;
+    private Long id;
 
     @Column(length = 50, nullable = false)
     private Date check_in;

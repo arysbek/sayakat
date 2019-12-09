@@ -4,7 +4,6 @@ package com.sayakat.housebookingapp.controllers;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sayakat.housebookingapp.exception.ResourceNotFoundException;
 import com.sayakat.housebookingapp.model.User;
 import com.sayakat.housebookingapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -27,19 +25,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/")
+    public Page<User> getAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
 
     @GetMapping("/{id}")
-    private ResponseEntity<User> getOne(@PathVariable Long id) {
+    public ResponseEntity<User> getOne(@PathVariable Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             return ResponseEntity.ok(optionalUser.get());
         }
         return ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/")
-    public Page<User> fetchAllUsers(Pageable pageable) {
-        return userRepository.findAll(pageable);
     }
 
     @PostMapping("/")
@@ -48,13 +45,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createUser);
     }
 
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) throws JsonMappingException {
 
         User savedUser = userRepository.findById(id).get();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
         savedUser = objectMapper.updateValue(savedUser, user);
         userRepository.save(savedUser);
         return ResponseEntity.ok(savedUser);

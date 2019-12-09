@@ -15,7 +15,7 @@ public class Photo extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    private Long photo_id;
+    private Long id;
 
     @Lob
     @Column(name = "photo", columnDefinition="BLOB")
