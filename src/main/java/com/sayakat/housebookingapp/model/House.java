@@ -50,7 +50,7 @@ public class House extends AuditModel {
     @OneToMany(mappedBy = "id")
     private List<Photo> photo;
 
-    @OneToOne
+    @ManyToOne
     private Amenity amenity;
 
 }
