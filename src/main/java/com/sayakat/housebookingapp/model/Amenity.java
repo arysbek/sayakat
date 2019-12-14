@@ -12,14 +12,14 @@ public class Amenity extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     private Long id;
 
-    private boolean coffee;
-    private boolean kitchen;
-    private boolean garage;
-    private boolean parking;
-    private boolean laundry;
-    private boolean entertainment;
-    private boolean outdoor;
-    private boolean suitability;
+    private boolean coffee = false;
+    private boolean kitchen = false;
+    private boolean garage = false;
+    private boolean parking = false;
+    private boolean laundry = false;
+    private boolean entertainment = false;
+    private boolean outdoor = false;
+    private boolean suitability = false;
 
 }
 

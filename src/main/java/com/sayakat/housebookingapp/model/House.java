@@ -45,7 +45,6 @@ public class House extends AuditModel {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "host_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User host;
 
     @OneToMany(mappedBy = "id")
